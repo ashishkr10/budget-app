@@ -19,13 +19,14 @@ const Navbar = ({ userName }) => {
           method="post"
           action="/logout"
           onSubmit={(e) => {
-            if (!confirm("Delete user will erase all data")) {
+            if (!confirm("Are you sure want to logout")) {
               e.preventDefault();
             }
           }}
         >
           <button type="submit" className="btn btn--warning">
-            <span>Delete User</span>
+            <span>Logout</span>
+
             <TrashIcon width={20} />
           </button>
         </Form>

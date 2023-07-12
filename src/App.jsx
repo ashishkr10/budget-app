@@ -12,13 +12,14 @@ import { logoutAction } from "./actions/logout";
 import { deleteBudget } from "./actions/deleteBudget";
 
 // Routes
-import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
+import Dashboard, { dashboardAction, dashboardLoader } from "./pages/dashboard";
 import ExpensesPage, {
   expenseAction,
   expensesLoader,
 } from "./pages/expensesPage";
 import Error from "./components/Error";
 import BudgetPage, { budgetAction, budgetLoader } from "./pages/budgetPage";
+import Intro from "./components/Intro";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,12 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        index: true,
+        path: "/login",
+        element: <Intro />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/",
         element: <Dashboard />,
         loader: dashboardLoader,
         action: dashboardAction,

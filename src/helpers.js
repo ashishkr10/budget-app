@@ -1,5 +1,9 @@
+//Firebase import
+import { db } from "./firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
+
 export const wait = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 2000));
+  new Promise((res) => setTimeout(res, Math.random() * 1000));
 
 //color
 const generateRandomColor = () => {
@@ -90,4 +94,22 @@ export const formatCurrency = (amt) => {
     style: "currency",
     currency: "INR",
   });
+};
+
+//Get Firebase data
+export const fetchPost = async () => {
+  const uid = localStorage.getItem("uid");
+  let items = [];
+  const q = query(collection(db, "users"), where("uid", "==", uid));
+  const docs = await getDocs(q);
+  docs.forEach((doc) => {
+    items.push(doc.data());
+  });
+  // console.log(items);
+  if (items[0].data) {
+    items?.map((service) => {
+      localStorage.setItem("budgets", JSON.stringify(service.data.budgets));
+      localStorage.setItem("expenses", JSON.stringify(service.data.expenses));
+    });
+  }
 };

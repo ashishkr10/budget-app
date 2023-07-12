@@ -34,7 +34,6 @@ export async function dashboardAction({ request }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
 
-  //new user submission
   if (_action === "newUser") {
     try {
       localStorage.setItem("userName", JSON.stringify(values.userName));
@@ -83,9 +82,9 @@ const Dashboard = () => {
     <>
       {userName ? (
         <div className="dashboard">
-          <h1>
-            Welcome back, <span className="accent">{userName}</span>
-          </h1>
+          <h2>
+            Welcome <span className="accent">{userName}</span>
+          </h2>
           <div className="grid-sm">
             {budgets && budgets.length > 0 ? (
               <div className="grid-lg">
@@ -93,7 +92,7 @@ const Dashboard = () => {
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
                 </div>
-                <h2>Existing Budgets</h2>
+                <h3>Existing Budgets</h3>
                 <div className="budgets">
                   {budgets.map((budget) => (
                     <BudgetItem key={budget.id} budget={budget} />
@@ -101,7 +100,7 @@ const Dashboard = () => {
                 </div>
                 {expenses && expenses.length > 0 && (
                   <div className="grid-md">
-                    <h2>Recent Expenses</h2>
+                    <h3>Recent Expenses</h3>
                     <Table
                       expenses={expenses
                         .sort((a, b) => b.createdAt - a.createdAt)
