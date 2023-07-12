@@ -33,7 +33,7 @@ const ExpenseItem = ({ expense, showBudget }) => {
         </td>
       )}
       <td>
-        <fetcher.Form method="" post>
+        <fetcher.Form method="post">
           <input type="hidden" name="_action" value="deleteExpense" />
           <input type="hidden" name="expenseId" value={expense.id} />
           <button
